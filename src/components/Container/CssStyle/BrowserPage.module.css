@@ -1,0 +1,24 @@
+.container {
+    width: 300px;
+    display: inline-block;
+    padding-bottom: 10px;
+    margin: 50px 50px;
+  }
+  
+  .container:hover {
+      box-shadow: 0 5px 10px rgb(0 0 0 / 22%), 0 1px 2px rgb(0 0 0 / 34%);
+      transition: all .3s cubic-bezier(.25,.8,.25,1);
+  }
+  
+  .Img img {
+      width: 100%;
+      border-radius: 20px;
+  }
+  
+  @media only screen and (max-width: 800px) {
+      .container {
+        margin: 50px 50px;
+        text-align: center;
+        width: auto;
+      }
+  }

@@ -1,0 +1,22 @@
+.box {
+    margin: 100px 50px;
+    background-color: #ccc;
+    text-align: center;
+}
+
+.box h1 {
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 2px solid #ccc;
+    width: 200px;
+    margin: auto auto 10px;
+    padding-top: 15px;
+    margin-bottom: 35px;
+}
+
+@media only screen and (max-width: 800px) {
+   .box {
+    margin: 0 0;
+    text-align: unset;
+   }
+}

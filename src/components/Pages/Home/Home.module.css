@@ -1,0 +1,34 @@
+.box {
+    margin: 40px;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.holder {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    justify-content: space-around;
+    flex-direction: row;
+    margin-top: 0;
+    margin-bottom: 0;
+    align-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 755px) {
+    .holder {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 0;
+        justify-content: space-around;
+        align-content: center;
+        flex-direction: row;
+        align-items: center;
+    }
+}

@@ -1,0 +1,20 @@
+.shape1 {
+    margin: 50px 50px;
+}
+
+.inside {
+   margin: 0 50px;
+   display: flex;
+   align-items: center;
+   padding: 35px 0;
+}
+
+.inside img {
+    width: auto;
+    height: 125px;
+    border-radius: 15px;
+}
+
+.inside h2 {
+    padding-left: 2rem;
+}
