@@ -9,7 +9,9 @@ import CartContext from "../../store/ContextProvider/CartProvider/cart-context";
 import AuthContext from "../../store/ContextProvider/AuthProvider/auth-context";
 
 const Cart = (props) => {
-  const data = useData();
+  const data = useData(
+    "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [show, setShow] = useState(false);
   let { id } = useParams();

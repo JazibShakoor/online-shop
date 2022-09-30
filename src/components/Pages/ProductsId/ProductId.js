@@ -8,7 +8,9 @@ import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 
 const ProductId = () => {
   let { id } = useParams();
-  const data = useData();
+  const data = useData(
+    "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
+  );
   let productId;
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);

@@ -1,14 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 
 //to tell react that we are making custome-hook
-const useData = () => {
+const useData = (url) => {
   const [datas, setDatas] = useState();
 
-  const fetchedValue = useCallback(async () => {
+  const fetchedValue = async () => {
     try {
-      const response = await fetch(
-        "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
-      );
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -16,16 +14,24 @@ const useData = () => {
       const data = await response.json();
 
       for (const key in data) {
-        setDatas(data[key]);
+        if (data[key].userId) {
+          const OrderData = [];
+          OrderData.push({
+            id: key,
+            orderData: data[key].orderData,
+            userId: data[key].userId,
+          });
+          setDatas(OrderData);
+        } else {
+          setDatas(data[key]);
+        }
       }
     } catch (err) {
       throw new Error(err.message);
     }
-  }, []);
+  };
 
-  useEffect(() => {
-    fetchedValue();
-  }, [fetchedValue]);
+  fetchedValue();
 
   return datas;
 };

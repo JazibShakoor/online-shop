@@ -1,19 +1,21 @@
 import React, { Fragment } from "react";
 import BrowserPage from "../../Container/BrowserPage/BrowserPage";
 import classes from "./Browser.module.css";
-import useCategory from "../../../store/CustomHook/CategoryData/CategoryHooks";
+import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 
 const Browser = () => {
-  const category = useCategory();
+  const datas = useData(
+    "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/category.json"
+  );
 
   let browseData = (
     <React.Fragment>
-      {category &&
-        category.map((data) => <BrowserPage key={data.id} product={data} />)}
+      {datas &&
+        datas.map((data) => <BrowserPage key={data.id} product={data} />)}
     </React.Fragment>
   );
 
-  if (!category) {
+  if (!datas) {
     browseData = "Data Loading!";
   }
 

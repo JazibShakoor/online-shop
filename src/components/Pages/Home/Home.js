@@ -5,7 +5,9 @@ import HomePage from "../../Container/HomePage/HomePage";
 import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 
 const Home = () => {
-  const data = useData();
+  const data = useData(
+    "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
+  );
 
   let displayData = (
     <React.Fragment>

@@ -6,7 +6,9 @@ import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 
 const Category = () => {
   let { category } = useParams();
-  const data = useData();
+  const data = useData(
+    "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
+  );
   let searchId;
 
   if (!data) {
