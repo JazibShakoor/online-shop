@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CategoryPage from "../../Container/CategoryPage/CategoryPage";
 import classes from "./Category.module.css";
@@ -6,9 +6,13 @@ import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 
 const Category = () => {
   let { category } = useParams();
-  const datas = useData(
+  const { datas, fetchedValue } = useData(
     "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
   );
+
+  useEffect(() => {
+    fetchedValue();
+  }, [fetchedValue]);
 
   let filterData = (
     <React.Fragment>
