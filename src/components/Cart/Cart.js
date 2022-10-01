@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useData from "../../store/CustomHook/MainData/FetchDataHook";
 import Modal from "../Ui/Modal";
@@ -9,7 +9,7 @@ import CartContext from "../../store/ContextProvider/CartProvider/cart-context";
 import AuthContext from "../../store/ContextProvider/AuthProvider/auth-context";
 
 const Cart = (props) => {
-  const data = useData(
+  const { datas, fetchedValue } = useData(
     "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,6 +18,10 @@ const Cart = (props) => {
   const cartCtx = useContext(CartContext);
   const authCtx = useContext(AuthContext);
   let searchProductId;
+
+  useEffect(() => {
+    fetchedValue();
+  }, [fetchedValue]);
 
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
@@ -43,10 +47,10 @@ const Cart = (props) => {
     setShow(true);
   };
 
-  if (!data) {
+  if (!datas) {
     searchProductId = "Loading!";
   } else {
-    let filterProductId = data.filter((data) => data.id === id);
+    let filterProductId = datas.filter((data) => data.id === id);
     searchProductId = filterProductId.map((data) => (
       <CartItem key={data.id} product={data} />
     ));
