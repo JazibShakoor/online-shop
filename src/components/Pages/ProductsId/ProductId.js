@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ProductIdPage from "../../Container/ProductIdPage/ProductIdPage";
 import AuthContext from "../../../store/ContextProvider/AuthProvider/auth-context";
@@ -8,9 +8,13 @@ import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 
 const ProductId = () => {
   let { id } = useParams();
-  const datas = useData(
+  const { datas, fetchedValue } = useData(
     "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
   );
+
+  useEffect(() => {
+    fetchedValue();
+  }, [fetchedValue]);
 
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
@@ -31,14 +35,6 @@ const ProductId = () => {
   if (!datas) {
     searchProductId = "Loading Data!";
   }
-
-  // else {
-  //   let searchProductId = data.filter((x) => x.id === id);
-
-  //   productId = searchProductId.map((z) => (
-  //     <ProductIdPage key={z.id} product={z} click={showCartHandler} />
-  //   ));
-  // }
 
   return (
     <div className={classes.shape}>
