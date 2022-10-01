@@ -6,21 +6,29 @@ import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 
 const Category = () => {
   let { category } = useParams();
-  const data = useData(
+  const datas = useData(
     "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/cars.json"
   );
-  let searchId;
 
-  if (!data) {
-    searchId = "Loading Data!";
-  } else {
-    let filterData = data.filter((x) => x.catagory === category);
-    searchId = filterData.map((x) => <CategoryPage key={x.id} product={x} />);
+  let filterData = (
+    <React.Fragment>
+      {datas && datas.filter((x) => x.catagory === category)}
+    </React.Fragment>
+  );
+
+  if (!datas) {
+    filterData = "Loading Data!";
   }
 
   return (
     <div className={classes.shape}>
-      <Fragment>{searchId}</Fragment>
+      <Fragment>
+        {datas && filterData.props
+          ? filterData.props.children.map((x) => (
+              <CategoryPage key={x.id} product={x} />
+            ))
+          : filterData}
+      </Fragment>
     </div>
   );
 };
