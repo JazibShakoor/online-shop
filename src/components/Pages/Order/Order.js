@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AuthContext from "../../../store/ContextProvider/AuthProvider/auth-context";
 import OrderPage from "../../Container/OrderPage/OrderPage";
 import classes from "./Order.module.css";
@@ -7,9 +7,13 @@ import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 const Order = () => {
   const authCtx = useContext(AuthContext);
   let idToken = authCtx.token;
-  let datas = useData(
+  let { datas, fetchedValue } = useData(
     "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/carsdata.json"
   );
+
+  useEffect(() => {
+    fetchedValue();
+  }, [fetchedValue]);
 
   let fetchOrder = (
     <React.Fragment>
@@ -21,21 +25,7 @@ const Order = () => {
     fetchOrder = "Loading Data";
   }
 
-  // if (!datas && authCtx.token) {
-  //   orderProduct = "Loading Data";
-  // } else {
-  //   let idToken = authCtx.token;
-  //   let fetchOrder = datas.filter((y) => y.userId === idToken);
-  //   orderProduct = fetchOrder.map((x) =>
-  //     x.orderData.map((data) => <OrderPage key={data.id} product={data} />)
-  //   );
-  // }
-
-  // if (datas && orderProduct.length === 0) {
-  //   orderProduct = <h2>No Record Found</h2>;
-  // }
-
-  if (datas && !fetchOrder.props.children) {
+  if (datas && fetchOrder === "") {
     fetchOrder = <h2>No Record Found</h2>;
   }
 
