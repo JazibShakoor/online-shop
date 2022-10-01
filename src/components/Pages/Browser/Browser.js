@@ -1,12 +1,16 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import BrowserPage from "../../Container/BrowserPage/BrowserPage";
 import classes from "./Browser.module.css";
 import useData from "../../../store/CustomHook/MainData/FetchDataHook";
 
 const Browser = () => {
-  const datas = useData(
+  const { datas, fetchedValue } = useData(
     "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/category.json"
   );
+
+  useEffect(() => {
+    fetchedValue();
+  }, [fetchedValue]);
 
   let browseData = (
     <React.Fragment>
