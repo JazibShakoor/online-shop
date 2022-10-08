@@ -25,7 +25,7 @@ const Order = () => {
     fetchOrder = "Loading Data";
   }
 
-  if (datas && fetchOrder === "") {
+  if (datas && fetchOrder.length > 0) {
     fetchOrder = <h2>No Record Found</h2>;
   }
 
