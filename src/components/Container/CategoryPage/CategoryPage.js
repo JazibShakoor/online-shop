@@ -8,9 +8,7 @@ const CategoryPage = (props) => {
     <Fragment>
       <div className={classes.shape1}>
         <Link
-          to={`/product/${props.product.id}`}
-          style={{ textDecoration: "none", color: "black" }}
-        >
+          to={`/product/${props.product.id}`}>
           <Card>
             <div className={classes.inside}>
               <img src={props.product.image} alt="" />

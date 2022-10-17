@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import CartProvider from "./store/ContextProvider/CartProvider/CartProvider";
 import "./App.css";
-// import { submitHandler } from "./ProductArray/Array";
 
 const Home = lazy(() => import("./components/Pages/Home/Home"));
 const Browser = lazy(() => import("./components/Pages/Browser/Browser"));
@@ -13,7 +12,6 @@ const Order = lazy(() => import("./components/Pages/Order/Order"));
 const AuthForm = lazy(() => import("./components/Auth/AuthForm"));
 
 function App() {
-  // submitHandler();
   return (
     <Fragment>
       <Layout>

@@ -31,7 +31,7 @@ const useData = (url) => {
     }
   };
 
-  return {datas, fetchValue};
+  return { datas, fetchedValue };
 };
 
 export default useData;

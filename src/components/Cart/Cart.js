@@ -1,12 +1,11 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useData from "../../store/CustomHook/MainData/FetchDataHook";
 import Modal from "../Ui/Modal";
 import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 import BasicForm from "./Checkoutdemo";
-import CartContext from "../../store/ContextProvider/CartProvider/cart-context";
-import AuthContext from "../../store/ContextProvider/AuthProvider/auth-context";
+import usePostApi1 from "../../store/CustomHook/FetchApi/FetchApi1";
 
 const Cart = (props) => {
   const { datas, fetchedValue } = useData(
@@ -15,8 +14,7 @@ const Cart = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [show, setShow] = useState(false);
   let { id } = useParams();
-  const cartCtx = useContext(CartContext);
-  const authCtx = useContext(AuthContext);
+  const { actionPost } = usePostApi1();
   let searchProductId;
 
   useEffect(() => {
@@ -25,22 +23,7 @@ const Cart = (props) => {
 
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
-    const response = await fetch(
-      "https://carsdatabase-dfaec-default-rtdb.firebaseio.com/carsdata.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          user: userData,
-          orderData: cartCtx.items,
-          userId: authCtx.token,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    await response.json();
+    actionPost(userData);
   };
 
   const formHandler = () => {

@@ -1,15 +1,11 @@
-import { useState, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../../store/ContextProvider/AuthProvider/auth-context";
+import { useState, useRef} from "react";
 import classes from "./AuthForm.module.css";
+import usePostApi from "../../store/CustomHook/FetchApi/FetchHook";
 
 const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  const navigate = useNavigate();
-
-  const authCtx = useContext(AuthContext);
-
+  const {postApi} = usePostApi();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,40 +30,8 @@ const AuthForm = () => {
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyALimlatEFuWPIS9RX2npnxFBfBcp8ajoc";
     }
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        returnSecureToken: true,
-        idToken: authCtx.token,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        setIsLoading(false);
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errorMessage = "Authentication failed!";
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        //setting time in milisecond
-        const expirationTime = new Date(
-          new Date().getTime() + +data.expiresIn * 1000
-        );
-        authCtx.login(data.localId, expirationTime.toISOString());
-        navigate("/");
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    postApi(url, enteredEmail, enteredPassword);
+    setIsLoading(false);
   };
 
   return (

@@ -86,7 +86,7 @@
   .menu li:hover {
     display: inline-block;
     background-color:#4c9e9e;
-    transition: 0.3s ease;
+    transition: 0.3s ease;                         
   }
 
   .menu li + li {
