@@ -3,6 +3,7 @@ import AuthContext from "../../../store/ContextProvider/AuthProvider/auth-contex
 import OrderPage from "../../Container/OrderPage/OrderPage";
 import classes from "./Order.module.css";
 import useData from "../../../store/CustomHook/MainData/FetchDataHook";
+import Donut from "../../Ui/donut";
 
 const Order = () => {
   const authCtx = useContext(AuthContext);
@@ -22,10 +23,10 @@ const Order = () => {
   );
 
   if (!datas && authCtx.token) {
-    fetchOrder = "Loading Data";
+    fetchOrder = <Donut />;
   }
 
-  if (datas && fetchOrder.length > 0) {
+  if (datas && fetchOrder === "") {
     fetchOrder = <h2>No Record Found</h2>;
   }
 

@@ -3,6 +3,7 @@ import classes from "./Home.module.css";
 import SlideShow from "../../SlideShow/SlideShow";
 import HomePage from "../../Container/HomePage/HomePage";
 import useData from "../../../store/CustomHook/MainData/FetchDataHook";
+import Donut from "../../Ui/donut";
 
 const Home = () => {
   const { datas, fetchedValue } = useData(
@@ -20,7 +21,7 @@ const Home = () => {
   );
 
   if (!datas) {
-    displayData = "Found No Data To Be Display";
+    displayData = <Donut />;
   }
 
   return (
