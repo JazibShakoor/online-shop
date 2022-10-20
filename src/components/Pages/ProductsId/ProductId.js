@@ -5,6 +5,7 @@ import AuthContext from "../../../store/ContextProvider/AuthProvider/auth-contex
 import Cart from "../../Cart/Cart";
 import classes from "./ProductId.module.css";
 import useData from "../../../store/CustomHook/MainData/FetchDataHook";
+import Donut from "../../Ui/donut";
 
 const ProductId = () => {
   let { id } = useParams();
@@ -33,7 +34,7 @@ const ProductId = () => {
   );
 
   if (!datas) {
-    searchProductId = "Loading Data!";
+    searchProductId = <Donut />;
   }
 
   return (
