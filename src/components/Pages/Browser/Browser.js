@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import BrowserPage from "../../Container/BrowserPage/BrowserPage";
 import classes from "./Browser.module.css";
 import useData from "../../../store/CustomHook/MainData/FetchDataHook";
+import Donut from "../../Ui/donut";
 
 const Browser = () => {
   const { datas, fetchedValue } = useData(
@@ -20,7 +21,7 @@ const Browser = () => {
   );
 
   if (!datas) {
-    browseData = "Data Loading!";
+    browseData = <Donut />;
   }
 
   return (
