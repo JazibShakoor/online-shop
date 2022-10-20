@@ -27,7 +27,7 @@ const Order = () => {
   }
 
   if (datas && fetchOrder === "") {
-    fetchOrder = <h2>No Record Found</h2>;
+    fetchOrder = <h2>No Record to be Found</h2>;
   }
 
   return (
