@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import CategoryPage from "../../Container/CategoryPage/CategoryPage";
 import classes from "./Category.module.css";
 import useData from "../../../store/CustomHook/MainData/FetchDataHook";
+import Donut from "../../Ui/donut";
 
 const Category = () => {
   let { category } = useParams();
@@ -21,7 +22,7 @@ const Category = () => {
   );
 
   if (!datas) {
-    filterData = "Loading Data!";
+    filterData = <Donut />;
   }
 
   return (
